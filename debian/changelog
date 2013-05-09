@@ -1,16 +1,44 @@
-makedev (2.3.1-89ubuntu2) precise; urgency=low
+makedev (2.3.1-93) unstable; urgency=low
 
-  * Mark makedev as Multi-Arch: foreign to allow for mountall
-    to be installable with multi-arch (needed for armhf containers on x86)
+  * QA upload.
+  * Mark makedev as Multi-Arch: foreign to allow for mountall to be
+    installable with multi-arch (needed for armhf containers on x86; thanks,
+    Stéphane Graber).
+  * Remove preinst script, which had a buggy version comparison and in any
+    case only applied to upgrades from lenny (thanks, Steve Langasek;
+    closes: #674218).
 
- -- Stéphane Graber <stgraber@ubuntu.com>  Thu, 02 Feb 2012 17:11:39 -0500
+ -- Colin Watson <cjwatson@debian.org>  Thu, 09 May 2013 12:00:49 +0100
 
-makedev (2.3.1-89ubuntu1) lucid; urgency=low
+makedev (2.3.1-92) unstable; urgency=low
 
-  * Remove the udev handling; we actually deliberately invoke MAKEDEV on
-    udev-managed directories to make the basic devices now.
+  * QA upload.
+  * Fix "postinst fails on non-default Debian kernels and is 
+    useless on =< 3.4":
+    drop check for kernel version >= 2.4
+    (Closes: #685376)
+  * Fix "/run transition: Please update use of /dev/.udev":
+    additionally check for /run/udev, patch from Roger Leigh
+    (release goal).
+    (Closes: #644318)
 
- -- Scott James Remnant <scott@ubuntu.com>  Thu, 24 Dec 2009 03:29:23 +0000
+ -- gregor herrmann <gregoa@debian.org>  Sun, 09 Sep 2012 14:15:33 +0200
+
+makedev (2.3.1-91) unstable; urgency=low
+
+  * QA upload.
+  * Abort postinst when running no non-Linux kernels.
+    (Closes: #665461, #665472)
+
+ -- Robert Millan <rmh@debian.org>  Sat, 31 Mar 2012 11:55:47 +0200
+
+makedev (2.3.1-90) unstable; urgency=low
+
+  * finish orphaning package by changing maintainer to Debian QA Group
+  * add Vcs entries to the control file
+  * clean up a few lintian warnings
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 21 Mar 2012 10:50:08 +0100
 
 makedev (2.3.1-89) unstable; urgency=low
 

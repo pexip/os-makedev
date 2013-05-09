@@ -45,6 +45,25 @@ major_lp=6
 
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#
 
+# try to do the right things if udev is running
+if [ "$WRITE_ON_UDEV" ]; then
+  :
+elif [ -d /dev/.static/dev/ ] && [ "`pwd`" = /dev ] && [ -e /proc/mounts ] \
+    && grep -qE '^[^ ]+ /dev/\.static/dev' /proc/mounts; then
+  echo "udev active, devices will be created in /dev/.static/dev/"
+  cd /dev/.static/dev/
+elif [ -d /.dev/ ] && [ "`pwd`" = /dev ] && [ -e /proc/mounts ] \
+    && grep -qE '^[^ ]+ /\.dev' /proc/mounts; then
+  echo "udev active, devices will be created in /.dev/"
+  cd /.dev/
+elif [ -d /run/udev -o -d .udevdb/ -o -d .udev/ ] && [ "`pwd`" = /dev ]; then
+  echo "/run/udev or .udevdb or .udev presence implies active udev.  Aborting MAKEDEV invocation."
+  # use exit 0, not 1, so postinst scripts don't fail on this
+  exit 0
+fi
+
+#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#
+
 # don't stomp on devfs users
 if  [ -c .devfsd ]
 then
