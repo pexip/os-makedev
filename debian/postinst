@@ -1,8 +1,12 @@
-#!/bin/sh
-
-set +e
+#!/bin/sh -e
 
 #DEBHELPER#
+
+# don't stomp on non-Linux users
+if [ "$(uname -s)" != "Linux" ]
+then
+    exit 0
+fi
 
 cd /dev
 
@@ -30,10 +34,8 @@ test -e /dev/agpgart || MAKEDEV agpgart
 
 [ ! -f /dev/mouse ] && [ -f /dev/sunmouse ] && ln -s sunmouse mouse
 
-# force update of fb devices if kernel is Linux >= 2.4 and they already exist
-kern_rev1=`uname -r | sed -e 's@^\([^.]*\)\..*@\1@'`
-kern_rev2=`uname -r | sed -e 's@^[^.]*\.\([^.]*\)\..*@\1@'`
-if [ `uname -s` = "Linux" ] && [ $kern_rev1 -ge 2 ] && [ $kern_rev2 -ge 4 ] && [ -e /dev/fb0 ]
+# force update of fb devices if they already exist
+if [ -e /dev/fb0 ]
 then
 	MAKEDEV fb
 fi
