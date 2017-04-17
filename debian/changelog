@@ -1,6 +1,9 @@
 makedev (2.3.1-93pexip1) pexip; urgency=low
 
   * Migrate to Jessie
+  * Retain the following change from Ubuntu:
+    - Remove the udev handling; we actually deliberately invoke MAKEDEV on
+      udev-managed directories to make the basic devices now.
 
  -- John-Mark Bell <jmb@pexip.com>  Wed, 22 Mar 2017 18:19:37 +0000
 
