@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 5)
 Standards-Version: 3.9.3
 Vcs-Git: git://git.gag.com/debian/makedev
 Vcs-Browser: http://git.gag.com/?p=debian/makedev
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ jessie
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ stretch
 
 Package: makedev
 Architecture: all
