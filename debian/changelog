@@ -1,3 +1,9 @@
+makedev (2.3.1-93pexip2) pexip; urgency=low
+
+  * Migrate to Stretch
+
+ -- John-Mark Bell <jmb@pexip.com>  Sun, 29 Jul 2018 00:32:54 +0100
+
 makedev (2.3.1-93pexip1) pexip; urgency=low
 
   * Migrate to Jessie
